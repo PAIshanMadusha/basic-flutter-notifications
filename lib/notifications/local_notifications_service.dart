@@ -39,6 +39,40 @@ class LocalNotificationsService {
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin
-        >()?.requestNotificationsPermission();
+        >()
+        ?.requestNotificationsPermission();
+  }
+
+  //Show a Instant Notification
+  static Future<void> showInstantNotification({
+    required String title,
+    required String body,
+  }) async {
+    //Define the Notification Details
+    const NotificationDetails platformChannelSpecifications =
+        NotificationDetails(
+          //For Android
+          android: AndroidNotificationDetails(
+            importance: Importance.max,
+            priority: Priority.high,
+            "channel_id",
+            "channel_name",
+          ),
+
+          //For IOS
+          iOS: DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+          ),
+        );
+
+    //Show the Notification
+    await _flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      body,
+      platformChannelSpecifications,
+    );
   }
 }
