@@ -2,6 +2,7 @@ import 'package:basic_flutter_notifications/firebase_options.dart';
 import 'package:basic_flutter_notifications/notifications/local_notifications_service.dart';
 import 'package:basic_flutter_notifications/notifications/push_notifications_service.dart';
 import 'package:basic_flutter_notifications/pages/home_page.dart';
+import 'package:basic_flutter_notifications/pages/notification_details_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:timezone/data/latest.dart' as tz;
 //NavigatorKey
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //Initialize the Notification Service
@@ -18,16 +19,26 @@ void main() async{
   tz.initializeTimeZones();
 
   //Firebase Initialize
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   //Initialize the Push Notification Service
   await PushNotificationsService.init();
 
   //Listen for Incoming Notifications in Background Status
-  FirebaseMessaging.onBackgroundMessage(PushNotificationsService.onBackgroundNotification);
+  FirebaseMessaging.onBackgroundMessage(
+    PushNotificationsService.onBackgroundNotification,
+  );
 
+  //OnBackground Notification Tap
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
+    if (message.notification != null) {
+      debugPrint("Notification Tapped");
+      await PushNotificationsService.onBackgroundNotificationTap(
+        message,
+        navigatorKey,
+      );
+    }
+  });
   runApp(MyApp());
 }
 
@@ -42,6 +53,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         "/": (context) => HomePage(),
+        "/notification-details-page": (context) => NotificationDetailsPage(),
       },
     );
   }

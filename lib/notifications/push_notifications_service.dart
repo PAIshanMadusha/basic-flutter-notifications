@@ -2,12 +2,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class PushNotificationsService {
-
   //Create an Instance of the Firebase Messaging
   static final _firebaseMessaging = FirebaseMessaging.instance;
 
   //Initialize the Firebase Messaging
-  static Future<void> init()async{
+  static Future<void> init() async {
     //Request Permission for Notifications
     NotificationSettings settings = await _firebaseMessaging.requestPermission(
       alert: true,
@@ -16,9 +15,9 @@ class PushNotificationsService {
       provisional: false,
     );
     //Check If the Permission is Granted
-    if(settings.authorizationStatus == AuthorizationStatus.authorized){
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       debugPrint("Permission Granted!");
-    }else{
+    } else {
       debugPrint("Permission Denied or has not Accepted!");
       return;
     }
@@ -28,9 +27,20 @@ class PushNotificationsService {
   }
 
   //Listen for Incoming Notifications in Background Status
-  static Future<void> onBackgroundNotification(RemoteMessage message)async{
-    if(message.notification != null){
+  static Future<void> onBackgroundNotification(RemoteMessage message) async {
+    if (message.notification != null) {
       debugPrint("Background Message: ${message.notification!.title}");
     }
+  }
+
+  //Pass the Payload Data to the Notification Page
+  static Future<void> onBackgroundNotificationTap(
+    RemoteMessage message,
+    GlobalKey<NavigatorState> navigatorKey,
+  ) async {
+    navigatorKey.currentState!.pushNamed(
+      "/notification-details-page",
+      arguments: message,
+    );
   }
 }
