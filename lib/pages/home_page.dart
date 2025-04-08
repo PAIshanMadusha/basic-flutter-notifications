@@ -72,6 +72,19 @@ class HomePage extends StatelessWidget {
               labelData: "Recurring Notification",
               icon: Icons.notifications_active,
             ),
+            SizedBox(height: sizedBoxValue),
+            //Big Picture Notification
+            customElevatedButton(
+              onPressed: () async {
+                await LocalNotificationsService.showBigPictureNotification(
+                  title: "Testing Big Picture Notification 📧",
+                  body: "This is a Test Notification By PAIshanMadusha🥰👻",
+                  imageUrl: "@mipmap/ic_launcher",
+                );
+              },
+              labelData: "Send a Big Picture Notification",
+              icon: Icons.photo,
+            ),
           ],
         ),
       ),

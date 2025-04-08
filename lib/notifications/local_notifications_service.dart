@@ -148,4 +148,48 @@ class LocalNotificationsService {
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }
+
+  //Big Picture Notification
+  static Future<void> showBigPictureNotification({
+    required String title,
+    required String body,
+    required String imageUrl,
+  }) async {
+    //Generate the Big Picture Notification Details
+    final BigPictureStyleInformation bigPictureStyleInformation =
+        BigPictureStyleInformation(
+          DrawableResourceAndroidBitmap(imageUrl),
+          largeIcon: DrawableResourceAndroidBitmap(imageUrl),
+          contentTitle: title,
+          summaryText: body,
+          htmlFormatContent: true,
+          htmlFormatContentTitle: true,
+        );
+
+    NotificationDetails platformChannelSpecifications = NotificationDetails(
+      //For Android
+      android: AndroidNotificationDetails(
+        "channel_id",
+        "channel_name",
+        importance: Importance.max,
+        priority: Priority.high,
+        styleInformation: bigPictureStyleInformation,
+      ),
+      //For IOS
+      iOS: DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+        attachments: [DarwinNotificationAttachment(imageUrl)],
+      ),
+    );
+
+    //Show the Notification
+    await _flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      body,
+      platformChannelSpecifications,
+    );
+  }
 }
