@@ -1,5 +1,6 @@
 import 'package:basic_flutter_notifications/notifications/local_notifications_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -25,8 +26,8 @@ class HomePage extends StatelessWidget {
           children: [
             //Instant Notification
             customElevatedButton(
-              onPressed: () {
-                LocalNotificationsService.showInstantNotification(
+              onPressed: () async {
+                await LocalNotificationsService.showInstantNotification(
                   title: "Testing Instant 📧",
                   body: "This is a Test Notification By PAIshanMadusha🥰👻",
                 );
@@ -37,12 +38,12 @@ class HomePage extends StatelessWidget {
             SizedBox(height: sizedBoxValue),
             //Schedule a Notification
             customElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 //5 Second from Current Time
                 DateTime duration = DateTime.now().add(
                   const Duration(seconds: 5),
                 );
-                LocalNotificationsService.scheduleNotification(
+                await LocalNotificationsService.scheduleNotification(
                   title: "Testing Schedule 📧",
                   body: "This is a Test Notification By PAIshanMadusha🥰👻",
                   scheduleDate: duration,
@@ -50,6 +51,26 @@ class HomePage extends StatelessWidget {
               },
               labelData: "Schedule a Notification",
               icon: Icons.task,
+            ),
+            SizedBox(height: sizedBoxValue),
+            //Recurring Notifications
+            customElevatedButton(
+              onPressed: () async {
+                await LocalNotificationsService.showRecurringNotification(
+                  title: "Testing Recurring",
+                  body: "This is a Test Notification By PAIshanMadusha🥰👻",
+                  time: DateTime(
+                    DateTime.now().year,
+                    DateTime.now().month,
+                    DateTime.now().day,
+                    17,
+                    00,
+                  ), //5.00 PM
+                  day: Day.monday,
+                );
+              },
+              labelData: "Recurring Notification",
+              icon: Icons.notifications_active,
             ),
           ],
         ),

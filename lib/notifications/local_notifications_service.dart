@@ -1,3 +1,4 @@
+import 'package:basic_flutter_notifications/notifications/functions/util_functions.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -67,7 +68,6 @@ class LocalNotificationsService {
             presentSound: true,
           ),
         );
-
     //Show the Notification
     await _flutterLocalNotificationsPlugin.show(
       0,
@@ -101,7 +101,6 @@ class LocalNotificationsService {
             presentSound: true,
           ),
         );
-
     //Show the Notification
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       0,
@@ -110,6 +109,42 @@ class LocalNotificationsService {
       tz.TZDateTime.from(scheduleDate, tz.local),
       platformChannelSpecifications,
       androidScheduleMode: AndroidScheduleMode.alarmClock,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
+
+  //Recurring Notifications
+  static Future<void> showRecurringNotification({
+    required String title,
+    required String body,
+    required DateTime time,
+    required Day day,
+  }) async {
+    //Define the NOtification Details
+    const NotificationDetails platformChannelSpecifications =
+        NotificationDetails(
+          //For Android
+          android: AndroidNotificationDetails(
+            "channel_id",
+            "channel_name",
+            importance: Importance.max,
+            priority: Priority.high,
+          ),
+          //For IOS
+          iOS: DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+          ),
+        );
+    //Schedule the Notification
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+      0,
+      title,
+      body,
+      UtilFunctions().nextOfTime(time, day),
+      platformChannelSpecifications,
+      androidScheduleMode: AndroidScheduleMode.exact,
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }
