@@ -1,5 +1,6 @@
 import 'package:basic_flutter_notifications/firebase_options.dart';
 import 'package:basic_flutter_notifications/notifications/local_notifications_service.dart';
+import 'package:basic_flutter_notifications/notifications/push_notifications_service.dart';
 import 'package:basic_flutter_notifications/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,9 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
+
+  //Initialize the Push Notification Service
+  await PushNotificationsService.init();
 
   runApp(MyApp());
 }
