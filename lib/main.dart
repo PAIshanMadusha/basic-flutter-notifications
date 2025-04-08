@@ -3,6 +3,7 @@ import 'package:basic_flutter_notifications/notifications/local_notifications_se
 import 'package:basic_flutter_notifications/notifications/push_notifications_service.dart';
 import 'package:basic_flutter_notifications/pages/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -23,6 +24,9 @@ void main() async{
 
   //Initialize the Push Notification Service
   await PushNotificationsService.init();
+
+  //Listen for Incoming Notifications in Background Status
+  FirebaseMessaging.onBackgroundMessage(PushNotificationsService.onBackgroundNotification);
 
   runApp(MyApp());
 }

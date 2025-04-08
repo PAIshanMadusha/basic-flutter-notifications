@@ -26,4 +26,11 @@ class PushNotificationsService {
     String? token = await _firebaseMessaging.getToken();
     debugPrint("FCM Token: $token");
   }
+
+  //Listen for Incoming Notifications in Background Status
+  static Future<void> onBackgroundNotification(RemoteMessage message)async{
+    if(message.notification != null){
+      debugPrint("Background Message: ${message.notification!.title}");
+    }
+  }
 }
