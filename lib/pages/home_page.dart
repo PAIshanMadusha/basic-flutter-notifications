@@ -6,6 +6,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double sizedBoxValue = 15;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -22,19 +23,49 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton.icon(
+            //Instant Notification
+            customElevatedButton(
               onPressed: () {
                 LocalNotificationsService.showInstantNotification(
-                  title: "Text",
-                  body: "Text Notification By PAIshanMadusha🥰",
+                  title: "Testing Instant 📧",
+                  body: "This is a Test Notification By PAIshanMadusha🥰👻",
                 );
               },
-              label: Text("Send a Notification"),
-              icon: Icon(Icons.notifications),
+              labelData: "Send a Instant Notification",
+              icon: Icons.notifications,
+            ),
+            SizedBox(height: sizedBoxValue),
+            //Schedule a Notification
+            customElevatedButton(
+              onPressed: () {
+                //5 Second from Current Time
+                DateTime duration = DateTime.now().add(
+                  const Duration(seconds: 5),
+                );
+                LocalNotificationsService.scheduleNotification(
+                  title: "Testing Schedule 📧",
+                  body: "This is a Test Notification By PAIshanMadusha🥰👻",
+                  scheduleDate: duration,
+                );
+              },
+              labelData: "Schedule a Notification",
+              icon: Icons.task,
             ),
           ],
         ),
       ),
+    );
+  }
+
+  ElevatedButton customElevatedButton({
+    required void Function()? onPressed,
+    required String labelData,
+    required IconData icon,
+  }) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      label: Text(labelData),
+      icon: Icon(icon),
     );
   }
 }
