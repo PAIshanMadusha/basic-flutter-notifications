@@ -39,6 +39,28 @@ void main() async {
       );
     }
   });
+
+  //OnForeground Notification Tap
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
+    if (message.notification != null) {
+      debugPrint("Notification Tapped");
+      await PushNotificationsService.onForegroundNotificationTap(message);
+    }
+  });
+
+  //Handling Notifications in Terminated Status
+  final RemoteMessage? message =
+      await FirebaseMessaging.instance.getInitialMessage();
+  if (message != null) {
+    debugPrint("Launched from Terminated State");
+    Future.delayed(const Duration(seconds: 1), () {
+      navigatorKey.currentState!.pushNamed(
+        "/notification-details-page",
+        arguments: message,
+      );
+    });
+  }
+  
   runApp(MyApp());
 }
 

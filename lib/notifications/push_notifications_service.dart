@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:basic_flutter_notifications/notifications/local_notifications_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -42,5 +45,18 @@ class PushNotificationsService {
       "/notification-details-page",
       arguments: message,
     );
+  }
+
+  //Handle Foreground Notification
+  static Future<void> onForegroundNotificationTap(RemoteMessage message) async {
+    String payloadData = jsonEncode(message.data);
+    debugPrint("Got the Message in Foreground!");
+    if (message.notification != null) {
+      await LocalNotificationsService.showLoacalNotificationsWithPayload(
+        title: message.notification!.title!,
+        body: message.notification!.body!,
+        payload: payloadData,
+      );
+    }
   }
 }

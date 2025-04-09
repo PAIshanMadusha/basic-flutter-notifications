@@ -1,3 +1,4 @@
+import 'package:basic_flutter_notifications/main.dart';
 import 'package:basic_flutter_notifications/notifications/functions/util_functions.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -9,7 +10,12 @@ class LocalNotificationsService {
 
   static Future<void> onDidReceiveBackgroundNotificationResponse(
     NotificationResponse notificationResponse,
-  ) async {}
+  ) async {
+    await navigatorKey.currentState!.pushNamed(
+      "/notification-details-page",
+      arguments: notificationResponse,
+    );
+  }
 
   //Initialize the Notification
   static Future<void> init() async {
@@ -190,6 +196,39 @@ class LocalNotificationsService {
       title,
       body,
       platformChannelSpecifications,
+    );
+  }
+
+  //Show a Notification With a Payload
+  static Future<void> showLoacalNotificationsWithPayload({
+    required String title,
+    required String body,
+    required String payload,
+  }) async {
+    //Define the Notification Details
+    const NotificationDetails platformChannelSpecifications =
+        NotificationDetails(
+          //For Android
+          android: AndroidNotificationDetails(
+            "channel_id",
+            "channel_name",
+            importance: Importance.max,
+            priority: Priority.high,
+          ),
+          //For IOS
+          iOS: DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+          ),
+        );
+    //Show the Notification
+    await _flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      body,
+      platformChannelSpecifications,
+      payload: payload,
     );
   }
 }
