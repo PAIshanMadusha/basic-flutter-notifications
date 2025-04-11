@@ -42,13 +42,39 @@ class NotificationDetailsPage extends StatelessWidget {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
     return Scaffold(
-      appBar: AppBar(title: const Text("Notifications")),
+      appBar: AppBar(
+        title: const Text(
+          "Payload Notifications",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Name: ${payload["name"] ?? 'N/A'}"),
-            Text("Age: ${payload["age"] ?? 'N/A'}"),
+            Icon(Icons.task_outlined, color: Colors.greenAccent, size: 150),
+            SizedBox(height: 15),
+            Text(
+              "Name: ${payload["name"] ?? 'N/A'}",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 15),
+            Text(
+              "Age: ${payload["age"] ?? 'N/A'}",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
           ],
         ),
       ),
