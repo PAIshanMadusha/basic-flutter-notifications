@@ -74,7 +74,8 @@ flutter pub get
   
 ### ⚠️ Not familiar with the FlutterFire CLI?
 
-- 📖I’ve written a detailed [Medium](https://medium.com/@ishanmadusha) article explaining the step-by-step process to connect Firebase to Flutter using the CLI with screenshots to guide you through it. **Read my article on Medium here:** [Link](https://medium.com/@ishanmadusha/using-firebase-cli-to-easily-connect-firebase-with-your-flutter-app-927e0021bc44)
+- I’ve written a detailed [Medium](https://medium.com/@ishanmadusha) article explaining the step-by-step process to connect Firebase to Flutter using the CLI with screenshots to guide 
+  you through it. **📖 Read my article on Medium here:** [Link](https://medium.com/@ishanmadusha/using-firebase-cli-to-easily-connect-firebase-with-your-flutter-app-927e0021bc44)
 - So, follow the above steps and add Firebase to your Flutter project using the FlutterFire CLI.
 
 ### ✅ Now you can run the app. Make sure there are no errors:
