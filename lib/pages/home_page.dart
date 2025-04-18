@@ -163,28 +163,31 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  ElevatedButton customElevatedButton({
+  Widget customElevatedButton({
     required void Function()? onPressed,
     required String labelData,
     required IconData icon,
   }) {
-    return ElevatedButton.icon(
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(Colors.black),
-        padding: WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton.icon(
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(Colors.black),
+          padding: WidgetStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          ),
         ),
-      ),
-      onPressed: onPressed,
-      label: Text(
-        labelData,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
+        onPressed: onPressed,
+        label: Text(
+          labelData,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
         ),
+        icon: Icon(icon, size: 30, color: Colors.white),
       ),
-      icon: Icon(icon, size: 30, color: Colors.white),
     );
   }
 }
