@@ -93,7 +93,7 @@ flutter pub get
 ---
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3449fb64-a7c4-42f4-a018-6281f91e98e2" alt="Screenshot 1" width="175">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/ff417c98-8c28-47d2-90aa-937262c7a8a4" alt="Screenshot 1" width="175">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/user-attachments/assets/5bdf20d4-f1bd-4486-8eb9-059ee905b842" alt="Screenshot 2" width="175">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/user-attachments/assets/75612d0e-e59b-4e77-8940-abfbdfff078d" alt="Screenshot 3" width="175">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/user-attachments/assets/1432b605-54e7-404f-a7cd-6990befb8790" alt="Screenshot 3" width="175">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
