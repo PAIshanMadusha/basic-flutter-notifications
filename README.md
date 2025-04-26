@@ -29,7 +29,7 @@ A simple and powerful **Basic Flutter Notifications App** built with **Firebase 
 | Payload Data             | Sent via Firebase        | When Notification is click Opens a separate screen displaying additional data passed via notification.  |
 
 ## 🛠️ Dependencies:
-The following technologies are used in this project:
+The following dependencies are used in this project:
 
 ```yaml
 flutter_local_notifications: ^19.0.0
